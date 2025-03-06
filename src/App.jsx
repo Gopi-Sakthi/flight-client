@@ -39,7 +39,7 @@ function App() {
       setUserEmail(null);
       navigate("/signin");
     }
-  }, [navigate]); // ✅ Added `navigate` dependency
+  }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("userEmail");
@@ -47,29 +47,21 @@ function App() {
     navigate("/signin");
   };
 
-  if (!userEmail) return null; // ✅ Prevents rendering before user check is complete
+  if (!userEmail) return null;
 
   return (
     <>
-<<<<<<< HEAD
       <button
         onClick={handleLogout}
         className="bg-red-500 text-white p-2 rounded"
       >
-=======
-      <button onClick={handleLogout} className="bg-red-500 text-white p-2 rounded">
->>>>>>> b4cf5bf (code changes)
         Logout
       </button>
       <ShowPassengerList />
       <SearchForm setChildData={setFormData} />
-<<<<<<< HEAD
       {formData.passengerscount > 0 && (
         <EnterPassengerDetails data={formData} userEmail={userEmail} />
       )}
-=======
-      {formData.passengerscount > 0 && <EnterPassengerDetails data={formData} userEmail={userEmail} />}
->>>>>>> b4cf5bf (code changes)
     </>
   );
 }

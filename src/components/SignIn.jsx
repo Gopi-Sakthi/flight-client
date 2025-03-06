@@ -7,7 +7,11 @@ import Logo from "./Logo";
 const SignIn = () => {
   const [signIn, setSignIn] = useState(true);
   const [message, setMessage] = useState(null);
-  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const navigate = useNavigate();
 
@@ -18,15 +22,11 @@ const SignIn = () => {
 
   const validData = () => {
     if (!signIn) {
-<<<<<<< HEAD
       const message = validateSignUp(
         formData.name,
         formData.email,
         formData.password
       );
-=======
-      const message = validateSignUp(formData.name, formData.email, formData.password);
->>>>>>> b4cf5bf (code changes)
       setMessage(message);
       return message;
     }
@@ -40,7 +40,6 @@ const SignIn = () => {
     if (validationError === null) {
       try {
         const endpoint = signIn ? "signin.php" : "signup.php";
-<<<<<<< HEAD
         const response = await axios.post(
           `http://localhost/flight/${endpoint}`,
           formData,
@@ -48,20 +47,11 @@ const SignIn = () => {
             headers: { "Content-Type": "application/json" },
           }
         );
-=======
-        const response = await axios.post(`http://localhost/flight/${endpoint}`, formData, {
-          headers: { "Content-Type": "application/json" },
-        });
->>>>>>> b4cf5bf (code changes)
 
         if (response.data.success) {
           if (signIn) {
             localStorage.setItem("userEmail", formData.email);
-<<<<<<< HEAD
             navigate("/searchform");
-=======
-            navigate("/");
->>>>>>> b4cf5bf (code changes)
           } else {
             setSignIn(true);
             setMessage("Sign Up successful! Please Sign In.");
@@ -77,8 +67,7 @@ const SignIn = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="">
+    <div className="flex flex-col items-center">
       <Logo />
       <div className="grid justify-center items-center">
         <form
@@ -137,26 +126,6 @@ const SignIn = () => {
             }}
             className="hover:text-red-400 cursor-pointer"
           >
-=======
-    <div className="flex flex-col items-center">
-      <Logo />
-      <div className="grid justify-center items-center">
-        <form onSubmit={handleSubmit} className="flex flex-col w-[500px] h-[500px] rounded-2xl items-center text-center place-content-center bg-[url(https://c4.wallpaperflare.com/wallpaper/417/287/725/flight-wallpaper-preview.jpg)] text-white">
-          <h2 className="text-xl font-bold py-2">{signIn ? "Sign In" : "Sign Up"}</h2>
-
-          {!signIn && <input name="name" type="text" placeholder="Enter name" className="border rounded-lg p-2 my-1" value={formData.name} onChange={handleChange} required />}
-
-          <input name="email" type="email" placeholder="Enter email" className="border rounded-lg p-2 my-1" value={formData.email} onChange={handleChange} required />
-          <input name="password" type="password" placeholder="Enter password" className="border rounded-lg p-2 my-1" value={formData.password} onChange={handleChange} required />
-
-          <p className="text-red-500 text-sm max-w-52">{message}</p>
-
-          <button type="submit" className="border rounded-lg p-2 my-1 hover:bg-blue-500 hover:text-white">
-            {signIn ? "Sign In" : "Sign Up"}
-          </button>
-
-          <p onClick={() => { setSignIn(!signIn); setMessage(null); setFormData({ name: "", email: "", password: "" }); }} className="hover:text-red-400 cursor-pointer">
->>>>>>> b4cf5bf (code changes)
             {signIn ? "New User? Sign Up" : "Already a user? Sign In"}
           </p>
         </form>
