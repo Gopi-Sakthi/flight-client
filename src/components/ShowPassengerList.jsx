@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import EditModal from "./EditModal";
-import DeletePassengerDetails from "./DeletePassengerDetails";
+import { useNavigate } from "react-router";
 
 const ShowPassengerList = () => {
-  const [showList, setShowList] = useState(false);
+  const navigate = useNavigate();
   const handleListClick = () => {
-    setShowList(!showList);
+    navigate("/bookinghistory");
   };
 
   return (
@@ -18,14 +16,17 @@ const ShowPassengerList = () => {
           List
         </button>
       </div>
-      {showList && (
-        <div className="flex justify-center items-center gap-3">
-          <EditModal />
-          <DeletePassengerDetails />
-        </div>
-      )}
     </>
   );
 };
 
 export default ShowPassengerList;
+
+{
+  /* {showList && (
+        <div className="flex justify-center items-center gap-3">
+          <EditModal />
+          <DeletePassengerDetails />
+        </div>
+      )} */
+}

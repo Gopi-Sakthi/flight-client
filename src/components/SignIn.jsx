@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { validateSignUp } from "./common";
-import Logo from "./Logo";
 
 const SignIn = () => {
   const [signIn, setSignIn] = useState(true);
@@ -51,7 +50,7 @@ const SignIn = () => {
         if (response.data.success) {
           if (signIn) {
             localStorage.setItem("userEmail", formData.email);
-            navigate("/searchform");
+            navigate("/");
           } else {
             setSignIn(true);
             setMessage("Sign Up successful! Please Sign In.");
@@ -68,11 +67,10 @@ const SignIn = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <Logo />
       <div className="grid justify-center items-center">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col w-[500px] h-[500px] rounded-2xl items-center text-center place-content-center bg-[url(https://c4.wallpaperflare.com/wallpaper/417/287/725/flight-wallpaper-preview.jpg)] text-white"
+          className="flex flex-col w-[500px] h-[500px] rounded-2xl items-center text-center place-content-center shadow"
         >
           <h2 className="text-xl font-bold py-2">
             {signIn ? "Sign In" : "Sign Up"}
@@ -109,11 +107,22 @@ const SignIn = () => {
             required
           />
 
+          {!signIn && (
+            <input
+              name="password"
+              type="password"
+              placeholder="Confirm password"
+              className="border rounded-lg p-2 my-1"
+              onChange={handleChange}
+              // required
+            />
+          )}
+
           <p className="text-red-500 text-sm max-w-52">{message}</p>
 
           <button
             type="submit"
-            className="border rounded-lg p-2 my-1 hover:bg-blue-500 hover:text-white"
+            className="border rounded-lg p-2 my-2 hover:bg-blue-500 hover:text-white"
           >
             {signIn ? "Sign In" : "Sign Up"}
           </button>

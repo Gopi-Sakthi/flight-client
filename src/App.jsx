@@ -10,7 +10,7 @@ function App() {
     origin: "",
     destination: "",
     date: "",
-    passengerscount: "0",
+    passengerscount: 0,
   });
 
   const [userEmail, setUserEmail] = useState(null);
@@ -19,50 +19,22 @@ function App() {
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
 
-    if (storedEmail) {
-      axios
-        .post("http://localhost/flight/verifyUser.php", { email: storedEmail })
-        .then((response) => {
-          if (response.data.exists) {
-            setUserEmail(storedEmail);
-          } else {
-            setUserEmail(null);
-            localStorage.removeItem("userEmail");
-            navigate("/signin");
-          }
-        })
-        .catch(() => {
-          setUserEmail(null);
-          navigate("/signin");
-        });
-    } else {
-      setUserEmail(null);
+    if (!storedEmail) {
       navigate("/signin");
     }
+    setUserEmail(storedEmail);
   }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("userEmail");
-    setUserEmail(null);
-    navigate("/signin");
-  };
 
   if (!userEmail) return null;
 
   return (
-    <>
-      <button
-        onClick={handleLogout}
-        className="bg-red-500 text-white p-2 rounded"
-      >
-        Logout
-      </button>
+    <div className="h-[90vh] w-auto shadow">
       <ShowPassengerList />
       <SearchForm setChildData={setFormData} />
       {formData.passengerscount > 0 && (
         <EnterPassengerDetails data={formData} userEmail={userEmail} />
       )}
-    </>
+    </div>
   );
 }
 
